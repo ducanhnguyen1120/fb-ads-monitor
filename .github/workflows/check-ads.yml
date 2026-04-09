@@ -1,0 +1,26 @@
+name: FB Ads Spending Monitor
+
+on:
+  schedule:
+    - cron: "0 * * * *"   # Mỗi 1 giờ
+  workflow_dispatch:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install requests
+
+      - name: Check FB Ads spending
+        env:
+          FB_ACCESS_TOKEN:     ${{ secrets.FB_ACCESS_TOKEN }}
+          FB_AD_ACCOUNT_ID:    ${{ secrets.FB_AD_ACCOUNT_ID }}
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+        run: python check_ads.py

@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
+  <title>FB Ads Monitor</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #0f0f0f; --surface: #1a1a1a; --surface2: #242424;
+      --border: #2e2e2e; --text: #f0f0f0; --muted: #888;
+      --blue: #3b82f6; --green: #22c55e; --red: #ef4444;
+      --orange: #f97316; --purple: #a855f7; --r: 12px;
+    }
+    body { background: var(--bg); color: var(--text); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; font-size: 15px; min-height: 100vh; padding-bottom: 40px; }
+
+    /* HEADER */
+    header { background: var(--surface); border-bottom: 1px solid var(--border); padding: 16px 20px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; }
+    .logo { font-weight: 700; font-size: 16px; display: flex; align-items: center; gap: 8px; }
+    .logo-icon { font-size: 20px; }
+    .header-actions { display: flex; gap: 8px; }
+
+    /* BUTTONS */
+    .btn { padding: 9px 18px; border-radius: 8px; border: none; font-size: 14px; font-weight: 600; cursor: pointer; transition: opacity .15s, transform .1s; display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; }
+    .btn:active { transform: scale(.97); }
+    .btn:disabled { opacity: .4; cursor: not-allowed; transform: none; }
+    .btn-primary { background: var(--blue); color: #fff; }
+    .btn-primary:hover { opacity: .88; }
+    .btn-success { background: var(--green); color: #fff; }
+    .btn-success:hover { opacity: .88; }
+    .btn-danger  { background: rgba(239,68,68,.15); border: 1px solid rgba(239,68,68,.3); color: var(--red); }
+    .btn-danger:hover  { background: rgba(239,68,68,.25); }
+    .btn-ghost  { background: var(--surface2); border: 1px solid var(--border); color: var(--text); }
+    .btn-ghost:hover  { background: #333; }
+    .btn-sm { padding: 6px 13px; font-size: 13px; }
+
+    /* MAIN */
+    main { max-width: 600px; margin: 0 auto; padding: 20px 16px; }
+
+    /* SETUP CARD */
+    .setup-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--r); padding: 24px; margin-bottom: 24px; }
+    .setup-title { font-size: 17px; font-weight: 700; margin-bottom: 6px; }
+    .setup-desc { color: var(--muted); font-size: 13px; line-height: 1.6; margin-bottom: 20px; }
+    .setup-desc a { color: var(--blue); }
+
+    /* FORM */
+    .form-group { margin-bottom: 16px; }
+    .form-label { display: block; font-size: 12px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: .05em; margin-bottom: 7px; }
+    .form-input { width: 100%; background: var(--bg); border: 1px solid var(--border); border-radius: 8px; padding: 11px 14px; color: var(--text); font-size: 14px; outline: none; transition: border-color .15s; font-family: monospace; }
+    .form-input:focus { border-color: var(--blue); }
+    .form-input::placeholder { color: var(--muted); font-family: -apple-system, sans-serif; }
+    .form-hint { font-size: 12px; color: var(--muted); margin-top: 5px; line-height: 1.5; }
+
+    /* SECTION HEADER */
+    .section-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
+    .section-title { font-size: 13px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: .07em; }
+
+    /* ACCOUNT CARD */
+    .account-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--r); padding: 18px; margin-bottom: 12px; transition: border-color .15s; }
+    .account-card:hover { border-color: #3e3e3e; }
+    .account-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
+    .account-name-input { background: transparent; border: none; color: var(--text); font-size: 15px; font-weight: 700; outline: none; width: 100%; padding: 0; }
+    .account-name-input::placeholder { color: var(--muted); font-weight: 400; }
+    .account-id-row { display: flex; align-items: center; gap: 8px; margin-bottom: 14px; }
+    .account-id-label { font-size: 12px; color: var(--muted); white-space: nowrap; }
+    .account-id-input { flex: 1; background: var(--bg); border: 1px solid var(--border); border-radius: 7px; padding: 7px 11px; color: var(--text); font-size: 13px; outline: none; font-family: monospace; transition: border-color .15s; }
+    .account-id-input:focus { border-color: var(--blue); }
+
+    .threshold-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .threshold-box { background: var(--bg); border: 1px solid var(--border); border-radius: 9px; padding: 12px; }
+    .threshold-type { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: .06em; margin-bottom: 4px; display: flex; align-items: center; gap: 5px; }
+    .threshold-type.spend  { color: var(--orange); }
+    .threshold-type.billing { color: var(--purple); }
+    .threshold-label { font-size: 11px; color: var(--muted); margin-bottom: 6px; }
+    .threshold-input-wrap { display: flex; align-items: center; gap: 6px; }
+    .threshold-input { flex: 1; background: var(--surface); border: 1px solid var(--border); border-radius: 6px; padding: 7px 9px; color: var(--text); font-size: 14px; font-weight: 600; outline: none; width: 100%; transition: border-color .15s; text-align: right; }
+    .threshold-input:focus { border-color: var(--blue); }
+    .currency-tag { font-size: 11px; color: var(--muted); white-space: nowrap; }
+
+    /* EMPTY STATE */
+    .empty-state { text-align: center; padding: 48px 20px; color: var(--muted); }
+    .empty-icon { font-size: 40px; margin-bottom: 12px; }
+    .empty-title { font-size: 15px; color: var(--text); margin-bottom: 6px; font-weight: 600; }
+    .empty-desc { font-size: 13px; line-height: 1.6; }
+
+    /* TOAST */
+    .toast { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%); background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 12px 20px; font-size: 13px; font-weight: 500; z-index: 999; display: none; align-items: center; gap: 8px; box-shadow: 0 8px 24px rgba(0,0,0,.4); max-width: 90vw; }
+    .toast.show { display: flex; animation: slideUp .2s ease; }
+    .toast.success { border-color: rgba(34,197,94,.4); color: var(--green); }
+    .toast.error   { border-color: rgba(239,68,68,.4);  color: var(--red); }
+    @keyframes slideUp { from { transform: translateX(-50%) translateY(10px); opacity: 0; } to { transform: translateX(-50%) translateY(0); opacity: 1; } }
+
+    /* SPINNER */
+    .spinner { width: 16px; height: 16px; border: 2px solid rgba(255,255,255,.3); border-top-color: #fff; border-radius: 50%; animation: spin .7s linear infinite; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* BADGE */
+    .badge { display: inline-flex; align-items: center; gap: 4px; padding: 3px 9px; border-radius: 20px; font-size: 11px; font-weight: 600; }
+    .badge.connected { background: rgba(34,197,94,.15); color: var(--green); }
+    .badge.disconnected { background: rgba(239,68,68,.12); color: var(--red); }
+    .badge .dot { width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+
+    /* SAVE BAR */
+    .save-bar { position: sticky; bottom: 0; background: var(--surface); border-top: 1px solid var(--border); padding: 14px 20px; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+    .save-hint { font-size: 12px; color: var(--muted); }
+
+    /* DIVIDER */
+    hr { border: none; border-top: 1px solid var(--border); margin: 20px 0; }
+
+    /* SETTINGS SECTION */
+    .settings-row { display: flex; align-items: center; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid var(--border); }
+    .settings-row:last-child { border-bottom: none; }
+    .settings-key { font-size: 13px; color: var(--muted); }
+    .settings-val { font-size: 13px; font-family: monospace; color: var(--text); max-width: 180px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .link-btn { background: none; border: none; color: var(--blue); font-size: 13px; cursor: pointer; padding: 0; }
+    .link-btn:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="logo"><span class="logo-icon">📊</span> FB Ads Monitor</div>
+  <div class="header-actions">
+    <div id="status-badge" class="badge disconnected"><span class="dot"></span> Chưa kết nối</div>
+  </div>
+</header>
+
+<main id="main">
+  <!-- Setup section (shown if not configured) -->
+  <div id="setup-section" class="setup-card" style="display:none">
+    <div class="setup-title">Kết nối GitHub</div>
+    <div class="setup-desc">
+      Web này lưu cấu hình tài khoản FB Ads lên repo GitHub của bạn.<br>
+      Cần tạo <a href="https://github.com/settings/tokens/new?scopes=repo&description=FB+Ads+Monitor" target="_blank">GitHub Personal Access Token</a> với quyền <strong>repo</strong>.
+    </div>
+
+    <div class="form-group">
+      <label class="form-label">GitHub Personal Access Token</label>
+      <input class="form-input" id="input-pat" type="password" placeholder="ghp_xxxxxxxxxxxxxxxxxxxx" autocomplete="off"/>
+      <div class="form-hint">Token chỉ lưu trên máy bạn (localStorage), không gửi đi đâu ngoài GitHub API.</div>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Repo (owner/name)</label>
+      <input class="form-input" id="input-repo" type="text" placeholder="ten-ban/fb-ads-monitor" autocomplete="off"/>
+    </div>
+    <div style="display:flex; gap:10px; margin-top:4px">
+      <button class="btn btn-primary" onclick="saveSetup()">Kết nối</button>
+    </div>
+  </div>
+
+  <!-- Main content (shown if configured) -->
+  <div id="content-section" style="display:none">
+
+    <!-- Connected info bar -->
+    <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:20px; flex-wrap:wrap; gap:8px">
+      <div style="font-size:13px; color:var(--muted)">Repo: <span id="repo-label" style="color:var(--text); font-family:monospace"></span></div>
+      <button class="link-btn" onclick="disconnect()">Đổi repo / token</button>
+    </div>
+
+    <!-- Accounts list -->
+    <div class="section-header">
+      <div class="section-title">Tài khoản FB Ads</div>
+      <button class="btn btn-ghost btn-sm" onclick="addAccount()">+ Thêm tài khoản</button>
+    </div>
+
+    <div id="accounts-list"></div>
+
+    <div id="empty-state" class="empty-state" style="display:none">
+      <div class="empty-icon">📭</div>
+      <div class="empty-title">Chưa có tài khoản nào</div>
+      <div class="empty-desc">Nhấn "Thêm tài khoản" để thêm tài khoản FB Ads đầu tiên.</div>
+    </div>
+
+  </div>
+</main>
+
+<!-- Save bar (shown when content loaded) -->
+<div class="save-bar" id="save-bar" style="display:none">
+  <div class="save-hint" id="save-hint">Chưa có thay đổi</div>
+  <button class="btn btn-success" id="btn-save" onclick="saveConfig()">
+    <span id="save-spinner" class="spinner" style="display:none"></span>
+    Lưu lên GitHub
+  </button>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<script>
+// ── State ─────────────────────────────────────────────────────────────────────
+let PAT  = '';
+let REPO = '';
+let config = { accounts: [] };
+let fileSha = '';
+let isDirty = false;
+
+// ── Init ──────────────────────────────────────────────────────────────────────
+window.addEventListener('load', async () => {
+  PAT  = localStorage.getItem('ghPAT')  || '';
+  REPO = localStorage.getItem('ghRepo') || '';
+
+  if (PAT && REPO) {
+    await loadConfig();
+  } else {
+    showSetup();
+  }
+});
+
+// ── Setup ─────────────────────────────────────────────────────────────────────
+function showSetup() {
+  document.getElementById('setup-section').style.display  = 'block';
+  document.getElementById('content-section').style.display = 'none';
+  document.getElementById('save-bar').style.display = 'none';
+  setStatus(false);
+}
+
+async function saveSetup() {
+  const pat  = document.getElementById('input-pat').value.trim();
+  const repo = document.getElementById('input-repo').value.trim();
+  if (!pat || !repo) return toast('Vui lòng điền đủ thông tin', 'error');
+
+  PAT  = pat;
+  REPO = repo;
+  localStorage.setItem('ghPAT',  PAT);
+  localStorage.setItem('ghRepo', REPO);
+  await loadConfig();
+}
+
+function disconnect() {
+  localStorage.removeItem('ghPAT');
+  localStorage.removeItem('ghRepo');
+  PAT = REPO = '';
+  document.getElementById('input-pat').value  = '';
+  document.getElementById('input-repo').value = '';
+  showSetup();
+}
+
+// ── GitHub API ────────────────────────────────────────────────────────────────
+async function ghGet(path) {
+  const r = await fetch(`https://api.github.com/repos/${REPO}/${path}`, {
+    headers: { Authorization: `token ${PAT}`, Accept: 'application/vnd.github.v3+json' }
+  });
+  if (!r.ok) throw new Error(`GitHub API ${r.status}: ${await r.text()}`);
+  return r.json();
+}
+
+async function ghPut(path, content, sha) {
+  const body = { message: 'Update config via FB Ads Monitor UI', content: btoa(unescape(encodeURIComponent(content))), sha };
+  const r = await fetch(`https://api.github.com/repos/${REPO}/${path}`, {
+    method: 'PUT',
+    headers: { Authorization: `token ${PAT}`, Accept: 'application/vnd.github.v3+json', 'Content-Type': 'application/json' },
+    body: JSON.stringify(body)
+  });
+  if (!r.ok) throw new Error(`GitHub API ${r.status}: ${await r.text()}`);
+  return r.json();
+}
+
+async function loadConfig() {
+  try {
+    const data = await ghGet('contents/config.json');
+    fileSha = data.sha;
+    config  = JSON.parse(decodeURIComponent(escape(atob(data.content.replace(/\n/g,'')))));
+    if (!config.accounts) config.accounts = [];
+
+    document.getElementById('setup-section').style.display   = 'none';
+    document.getElementById('content-section').style.display = 'block';
+    document.getElementById('save-bar').style.display        = 'flex';
+    document.getElementById('repo-label').textContent        = REPO;
+    setStatus(true);
+    renderAccounts();
+    setDirty(false);
+  } catch (err) {
+    toast('Không kết nối được: ' + err.message, 'error');
+    showSetup();
+  }
+}
+
+// ── Render ────────────────────────────────────────────────────────────────────
+function renderAccounts() {
+  const list = document.getElementById('accounts-list');
+  const empty = document.getElementById('empty-state');
+  list.innerHTML = '';
+
+  if (!config.accounts.length) {
+    empty.style.display = 'block';
+    return;
+  }
+  empty.style.display = 'none';
+
+  config.accounts.forEach((acc, i) => {
+    const card = document.createElement('div');
+    card.className = 'account-card';
+    card.innerHTML = `
+      <div class="account-header">
+        <input class="account-name-input" type="text"
+          placeholder="Tên tài khoản (tùy chọn)"
+          value="${esc(acc.name || '')}"
+          oninput="updateAccount(${i},'name',this.value)" />
+        <button class="btn btn-danger btn-sm" onclick="removeAccount(${i})">Xóa</button>
+      </div>
+      <div class="account-id-row">
+        <span class="account-id-label">Account ID:</span>
+        <input class="account-id-input" type="text" placeholder="act_XXXXXXXXXX hoặc chỉ số"
+          value="${esc(acc.id || '')}"
+          oninput="updateAccount(${i},'id',this.value)" />
+      </div>
+      <div class="threshold-grid">
+        <div class="threshold-box">
+          <div class="threshold-type spend">⚠️ Spend Cap</div>
+          <div class="threshold-label">Cảnh báo khi còn lại</div>
+          <div class="threshold-input-wrap">
+            <input class="threshold-input" type="number" min="0" step="10000"
+              value="${acc.spend_limit_warning ?? 150000}"
+              oninput="updateAccount(${i},'spend_limit_warning',+this.value)" />
+            <span class="currency-tag">VND</span>
+          </div>
+        </div>
+        <div class="threshold-box">
+          <div class="threshold-type billing">💳 Billing</div>
+          <div class="threshold-label">Cảnh báo khi còn đến ngưỡng</div>
+          <div class="threshold-input-wrap">
+            <input class="threshold-input" type="number" min="0" step="10000"
+              value="${acc.billing_threshold_warning ?? 200000}"
+              oninput="updateAccount(${i},'billing_threshold_warning',+this.value)" />
+            <span class="currency-tag">VND</span>
+          </div>
+        </div>
+      </div>`;
+    list.appendChild(card);
+  });
+}
+
+// ── Mutations ─────────────────────────────────────────────────────────────────
+function addAccount() {
+  config.accounts.push({ id: '', name: '', spend_limit_warning: 150000, billing_threshold_warning: 200000 });
+  renderAccounts();
+  setDirty(true);
+  // Focus the ID input of the new card
+  const inputs = document.querySelectorAll('.account-id-input');
+  if (inputs.length) inputs[inputs.length - 1].focus();
+}
+
+function removeAccount(i) {
+  config.accounts.splice(i, 1);
+  renderAccounts();
+  setDirty(true);
+}
+
+function updateAccount(i, key, val) {
+  config.accounts[i][key] = val;
+  setDirty(true);
+}
+
+// ── Save ──────────────────────────────────────────────────────────────────────
+async function saveConfig() {
+  const btn     = document.getElementById('btn-save');
+  const spinner = document.getElementById('save-spinner');
+  btn.disabled  = true;
+  spinner.style.display = 'inline-block';
+
+  try {
+    const content = JSON.stringify(config, null, 2) + '\n';
+    const res = await ghPut('contents/config.json', content, fileSha);
+    fileSha = res.content.sha;
+    setDirty(false);
+    toast('Đã lưu lên GitHub!', 'success');
+  } catch (err) {
+    toast('Lưu thất bại: ' + err.message, 'error');
+  } finally {
+    btn.disabled = false;
+    spinner.style.display = 'none';
+  }
+}
+
+// ── Helpers ───────────────────────────────────────────────────────────────────
+function setStatus(ok) {
+  const b = document.getElementById('status-badge');
+  b.className = `badge ${ok ? 'connected' : 'disconnected'}`;
+  b.innerHTML = `<span class="dot"></span> ${ok ? 'Đã kết nối' : 'Chưa kết nối'}`;
+}
+
+function setDirty(dirty) {
+  isDirty = dirty;
+  document.getElementById('save-hint').textContent = dirty ? 'Có thay đổi chưa lưu' : 'Đã đồng bộ';
+  document.getElementById('save-hint').style.color = dirty ? 'var(--orange)' : 'var(--muted)';
+}
+
+function esc(s) {
+  return String(s).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;');
+}
+
+let toastTimer;
+function toast(msg, type = 'success') {
+  const el = document.getElementById('toast');
+  el.textContent = (type === 'success' ? '✓ ' : '✕ ') + msg;
+  el.className = `toast show ${type}`;
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => { el.className = 'toast'; }, 3000);
+}
+</script>
+</body>
+</html>
