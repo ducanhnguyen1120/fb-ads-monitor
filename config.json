@@ -2,21 +2,21 @@
   "accounts": [
     {
       "id": "1250780585848438",
-      "name": "Marjorie Managa (TK2)",
-      "spend_limit_warning": 200000,
-      "billing_threshold_warning": 200000
+      "name": "Marjorie Managa (TK3)",
+      "currency": "VND",
+      "spend_limit_warning": 200000
     },
     {
       "id": "1884050678778357",
-      "name": "Stephanie Pucot (TK3)",
-      "spend_limit_warning": 5,
-      "billing_threshold_warning": 5
+      "name": "Stephanie Pucot (TK4)",
+      "currency": "USD",
+      "spend_limit_warning": 5
     },
     {
       "id": "329411803089088",
-      "name": "Cyrus Garote (TK4)",
-      "spend_limit_warning": 5,
-      "billing_threshold_warning": 5
+      "name": "Cyrus Garote (TK5)",
+      "currency": "USD",
+      "spend_limit_warning": 5
     }
   ]
 }
