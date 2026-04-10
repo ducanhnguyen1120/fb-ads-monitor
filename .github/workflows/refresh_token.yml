@@ -1,0 +1,44 @@
+name: Refresh FB Access Token
+
+on:
+  workflow_dispatch:
+    inputs:
+      app_id:
+        description: "FB App ID"
+        required: true
+      app_secret:
+        description: "FB App Secret"
+        required: true
+      short_lived_token:
+        description: "Short-lived token (lấy từ Graph API Explorer)"
+        required: true
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    permissions:
+      secrets: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install requests
+
+      - name: Exchange token
+        id: exchange
+        run: |
+          LONG_TOKEN=$(python gen_token.py "${{ github.event.inputs.app_id }}" "${{ github.event.inputs.app_secret }}" "${{ github.event.inputs.short_lived_token }}")
+          echo "::add-mask::$LONG_TOKEN"
+          echo "long_token=$LONG_TOKEN" >> $GITHUB_OUTPUT
+
+      - name: Update FB_ACCESS_TOKEN secret
+        env:
+          GH_TOKEN: ${{ secrets.GH_PAT }}
+        run: |
+          gh secret set FB_ACCESS_TOKEN --body "${{ steps.exchange.outputs.long_token }}" --repo ${{ github.repository }}
+          echo "Secret FB_ACCESS_TOKEN đã được cập nhật thành công."

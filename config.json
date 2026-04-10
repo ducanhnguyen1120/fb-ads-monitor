@@ -1,3 +1,22 @@
 {
-  "accounts": []
+  "accounts": [
+    {
+      "id": "1250780585848438",
+      "name": "Marjorie Managa (TK3)",
+      "spend_limit_warning": 200000,
+      "billing_threshold_warning": 200000
+    },
+    {
+      "id": "1884050678778357",
+      "name": "Stephanie Pucot (TK4)",
+      "spend_limit_warning": 500,
+      "billing_threshold_warning": 500
+    },
+    {
+      "id": "329411803089088",
+      "name": "Cyrus Garote (TK5)",
+      "spend_limit_warning": 500,
+      "billing_threshold_warning": 500
+    }
+  ]
 }
