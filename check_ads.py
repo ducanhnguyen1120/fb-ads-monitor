@@ -29,7 +29,7 @@ def check_account(access_token, account_cfg, discord_webhook):
 
     url = f"https://graph.facebook.com/v19.0/act_{account_id}"
     params = {
-        "fields": "name,currency,spend_cap,amount_spent,balance,billing_threshold_amount",
+        "fields": "name,currency,spend_cap,amount_spent,balance",
         "access_token": access_token,
     }
 
