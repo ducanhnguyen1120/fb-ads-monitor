@@ -9,14 +9,14 @@
     {
       "id": "1884050678778357",
       "name": "Stephanie Pucot (TK4)",
-      "spend_limit_warning": 500,
-      "billing_threshold_warning": 500
+      "spend_limit_warning": 5,
+      "billing_threshold_warning": 5
     },
     {
       "id": "329411803089088",
       "name": "Cyrus Garote (TK5)",
-      "spend_limit_warning": 500,
-      "billing_threshold_warning": 500
+      "spend_limit_warning": 5,
+      "billing_threshold_warning": 5
     }
   ]
 }
