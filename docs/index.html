@@ -12,11 +12,10 @@
       --blue: #3b82f6; --green: #22c55e; --red: #ef4444;
       --orange: #f97316; --purple: #a855f7; --r: 12px;
     }
-    body { background: var(--bg); color: var(--text); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; font-size: 15px; min-height: 100vh; padding-bottom: 40px; }
+    body { background: var(--bg); color: var(--text); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; font-size: 15px; min-height: 100vh; padding-bottom: 60px; }
 
     header { background: var(--surface); border-bottom: 1px solid var(--border); padding: 16px 20px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; }
     .logo { font-weight: 700; font-size: 16px; display: flex; align-items: center; gap: 8px; }
-    .logo-icon { font-size: 20px; }
 
     .btn { padding: 9px 18px; border-radius: 8px; border: none; font-size: 14px; font-weight: 600; cursor: pointer; transition: opacity .15s, transform .1s; display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; }
     .btn:active { transform: scale(.97); }
@@ -30,50 +29,50 @@
     .btn-ghost  { background: var(--surface2); border: 1px solid var(--border); color: var(--text); }
     .btn-ghost:hover  { background: #333; }
     .btn-sm { padding: 6px 13px; font-size: 13px; }
+    .btn-xs { padding: 5px 10px; font-size: 12px; border-radius: 6px; }
 
     main { max-width: 620px; margin: 0 auto; padding: 20px 16px; }
 
-    .setup-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--r); padding: 24px; margin-bottom: 24px; }
-    .setup-title { font-size: 17px; font-weight: 700; margin-bottom: 6px; }
-    .setup-desc { color: var(--muted); font-size: 13px; line-height: 1.6; margin-bottom: 20px; }
-    .setup-desc a { color: var(--blue); }
+    .card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--r); padding: 20px; margin-bottom: 16px; }
+    .card-title { font-size: 14px; font-weight: 700; margin-bottom: 14px; display: flex; align-items: center; gap: 8px; }
 
-    .form-group { margin-bottom: 16px; }
-    .form-label { display: block; font-size: 12px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: .05em; margin-bottom: 7px; }
-    .form-input { width: 100%; background: var(--bg); border: 1px solid var(--border); border-radius: 8px; padding: 11px 14px; color: var(--text); font-size: 14px; outline: none; transition: border-color .15s; font-family: monospace; }
+    .form-group { margin-bottom: 14px; }
+    .form-label { display: block; font-size: 12px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: .05em; margin-bottom: 6px; }
+    .form-input { width: 100%; background: var(--bg); border: 1px solid var(--border); border-radius: 8px; padding: 10px 13px; color: var(--text); font-size: 14px; outline: none; transition: border-color .15s; font-family: monospace; }
     .form-input:focus { border-color: var(--blue); }
     .form-input::placeholder { color: var(--muted); font-family: -apple-system, sans-serif; }
     .form-hint { font-size: 12px; color: var(--muted); margin-top: 5px; line-height: 1.5; }
+    .form-hint a { color: var(--blue); }
 
     .section-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
     .section-title { font-size: 13px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: .07em; }
 
     .account-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--r); padding: 18px; margin-bottom: 12px; }
-    .account-card:hover { border-color: #3e3e3e; }
     .account-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; gap: 10px; }
     .account-name-input { background: transparent; border: none; color: var(--text); font-size: 15px; font-weight: 700; outline: none; width: 100%; padding: 0; }
     .account-name-input::placeholder { color: var(--muted); font-weight: 400; }
 
-    .field-row { display: flex; align-items: center; gap: 8px; margin-bottom: 12px; }
+    .field-row { display: flex; align-items: center; gap: 8px; margin-bottom: 11px; }
     .field-label { font-size: 12px; color: var(--muted); white-space: nowrap; min-width: 80px; }
     .field-input { flex: 1; background: var(--bg); border: 1px solid var(--border); border-radius: 7px; padding: 7px 11px; color: var(--text); font-size: 13px; outline: none; font-family: monospace; transition: border-color .15s; }
     .field-input:focus { border-color: var(--blue); }
     .field-select { background: var(--bg); border: 1px solid var(--border); border-radius: 7px; padding: 7px 11px; color: var(--text); font-size: 13px; outline: none; cursor: pointer; }
-    .field-select:focus { border-color: var(--blue); }
 
-    .threshold-grid { display: grid; grid-template-columns: 1fr; gap: 10px; margin-top: 4px; }
-    .threshold-box { background: var(--bg); border: 1px solid var(--border); border-radius: 9px; padding: 12px; }
-    .threshold-type { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: .06em; margin-bottom: 6px; }
-    .threshold-type.spend { color: var(--orange); }
+    .threshold-box { background: var(--bg); border: 1px solid var(--border); border-radius: 9px; padding: 12px; margin-top: 4px; }
+    .threshold-type { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: .06em; color: var(--orange); margin-bottom: 6px; }
     .threshold-input-wrap { display: flex; align-items: center; gap: 8px; }
     .threshold-input { flex: 1; background: var(--surface); border: 1px solid var(--border); border-radius: 6px; padding: 7px 9px; color: var(--text); font-size: 14px; font-weight: 600; outline: none; transition: border-color .15s; text-align: right; }
     .threshold-input:focus { border-color: var(--blue); }
-    .currency-tag { font-size: 12px; color: var(--muted); white-space: nowrap; font-weight: 600; min-width: 32px; }
+    .currency-tag { font-size: 12px; color: var(--muted); font-weight: 600; min-width: 32px; }
 
-    .token-toggle { font-size: 12px; color: var(--blue); background: none; border: none; cursor: pointer; padding: 0; margin-top: 8px; }
-    .token-toggle:hover { text-decoration: underline; }
-    .token-section { margin-top: 10px; padding: 12px; background: var(--bg); border: 1px solid var(--border); border-radius: 8px; }
-    .token-hint { font-size: 11px; color: var(--muted); margin-top: 6px; line-height: 1.5; }
+    /* Token exchange section */
+    .token-box { margin-top: 12px; background: var(--bg); border: 1px solid var(--border); border-radius: 9px; padding: 13px; }
+    .token-box-title { font-size: 12px; font-weight: 600; color: var(--muted); margin-bottom: 10px; text-transform: uppercase; letter-spacing: .05em; }
+    .token-input-row { display: flex; gap: 8px; align-items: center; }
+    .token-input-row .field-input { font-size: 12px; }
+    .token-status { font-size: 12px; margin-top: 8px; padding: 7px 10px; border-radius: 6px; display: none; }
+    .token-status.ok  { background: rgba(34,197,94,.1); color: var(--green); border: 1px solid rgba(34,197,94,.2); display: block; }
+    .token-status.err { background: rgba(239,68,68,.1); color: var(--red);   border: 1px solid rgba(239,68,68,.2); display: block; }
 
     .empty-state { text-align: center; padding: 48px 20px; color: var(--muted); }
     .empty-icon { font-size: 40px; margin-bottom: 12px; }
@@ -86,7 +85,8 @@
     .toast.error   { border-color: rgba(239,68,68,.4);  color: var(--red); }
     @keyframes slideUp { from { transform: translateX(-50%) translateY(10px); opacity: 0; } to { transform: translateX(-50%) translateY(0); opacity: 1; } }
 
-    .spinner { width: 16px; height: 16px; border: 2px solid rgba(255,255,255,.3); border-top-color: #fff; border-radius: 50%; animation: spin .7s linear infinite; }
+    .spinner { width: 14px; height: 14px; border: 2px solid rgba(255,255,255,.3); border-top-color: #fff; border-radius: 50%; animation: spin .7s linear infinite; }
+    .spinner-dark { border-color: rgba(0,0,0,.15); border-top-color: currentColor; }
     @keyframes spin { to { transform: rotate(360deg); } }
 
     .badge { display: inline-flex; align-items: center; gap: 4px; padding: 3px 9px; border-radius: 20px; font-size: 11px; font-weight: 600; }
@@ -94,46 +94,66 @@
     .badge.disconnected { background: rgba(239,68,68,.12); color: var(--red); }
     .badge .dot { width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
 
-    .save-bar { position: sticky; bottom: 0; background: var(--surface); border-top: 1px solid var(--border); padding: 14px 20px; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+    .save-bar { position: fixed; bottom: 0; left: 0; right: 0; background: var(--surface); border-top: 1px solid var(--border); padding: 13px 20px; display: flex; align-items: center; justify-content: center; gap: 12px; }
     .save-hint { font-size: 12px; color: var(--muted); }
     .link-btn { background: none; border: none; color: var(--blue); font-size: 13px; cursor: pointer; padding: 0; }
     .link-btn:hover { text-decoration: underline; }
+
+    .info-row { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; }
   </style>
 </head>
 <body>
 
 <header>
-  <div class="logo"><span class="logo-icon">📊</span> FB Ads Monitor</div>
-  <div>
-    <div id="status-badge" class="badge disconnected"><span class="dot"></span> Chưa kết nối</div>
-  </div>
+  <div class="logo">📊 FB Ads Monitor</div>
+  <div id="status-badge" class="badge disconnected"><span class="dot"></span> Chưa kết nối</div>
 </header>
 
-<main id="main">
-  <div id="setup-section" class="setup-card" style="display:none">
-    <div class="setup-title">Kết nối GitHub</div>
-    <div class="setup-desc">
-      Web này lưu cấu hình tài khoản FB Ads lên repo GitHub của bạn.<br>
-      Cần tạo <a href="https://github.com/settings/tokens?type=beta" target="_blank">GitHub Fine-grained Token</a> với quyền <strong>Contents: Read and write</strong>.
+<main>
+  <!-- ── Setup ── -->
+  <div id="setup-section" style="display:none">
+    <div class="card">
+      <div class="card-title">🔗 Kết nối GitHub</div>
+      <div class="form-group">
+        <label class="form-label">GitHub Personal Access Token</label>
+        <input class="form-input" id="input-pat" type="password" placeholder="github_pat_xxxx" autocomplete="off"/>
+        <div class="form-hint">Cần <a href="https://github.com/settings/tokens?type=beta" target="_blank">Fine-grained token</a> với quyền <strong>Contents: Read and write</strong>. Lưu trên máy bạn, không gửi đi đâu.</div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Repo (owner/name)</label>
+        <input class="form-input" id="input-repo" type="text" placeholder="ten-ban/fb-ads-monitor" autocomplete="off"/>
+      </div>
+      <button class="btn btn-primary" onclick="saveSetup()">Kết nối</button>
     </div>
-    <div class="form-group">
-      <label class="form-label">GitHub Personal Access Token</label>
-      <input class="form-input" id="input-pat" type="password" placeholder="github_pat_xxxx" autocomplete="off"/>
-      <div class="form-hint">Token chỉ lưu trên máy bạn (localStorage), không gửi đi đâu ngoài GitHub API.</div>
-    </div>
-    <div class="form-group">
-      <label class="form-label">Repo (owner/name)</label>
-      <input class="form-input" id="input-repo" type="text" placeholder="ten-ban/fb-ads-monitor" autocomplete="off"/>
-    </div>
-    <button class="btn btn-primary" onclick="saveSetup()">Kết nối</button>
   </div>
 
+  <!-- ── Main content ── -->
   <div id="content-section" style="display:none">
-    <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:20px; flex-wrap:wrap; gap:8px">
+
+    <div class="info-row">
       <div style="font-size:13px; color:var(--muted)">Repo: <span id="repo-label" style="color:var(--text); font-family:monospace"></span></div>
       <button class="link-btn" onclick="disconnect()">Đổi repo / token</button>
     </div>
 
+    <!-- FB App config -->
+    <div class="card" id="app-config-card">
+      <div class="card-title">⚙️ Cài đặt FB App <span style="font-size:11px; color:var(--muted); font-weight:400">(dùng để exchange token)</span></div>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px">
+        <div class="form-group" style="margin:0">
+          <label class="form-label">App ID</label>
+          <input class="form-input" id="app-id-input" type="text" placeholder="1923883648490574"
+            oninput="saveAppConfig()" autocomplete="off"/>
+        </div>
+        <div class="form-group" style="margin:0">
+          <label class="form-label">App Secret</label>
+          <input class="form-input" id="app-secret-input" type="password" placeholder="xxxxxxxx"
+            oninput="saveAppConfig()" autocomplete="off"/>
+        </div>
+      </div>
+      <div class="form-hint" style="margin-top:8px">Lưu trên máy bạn (localStorage). Dùng để tự exchange short-lived → long-lived token.</div>
+    </div>
+
+    <!-- Accounts -->
     <div class="section-header">
       <div class="section-title">Tài khoản FB Ads</div>
       <button class="btn btn-ghost btn-sm" onclick="addAccount()">+ Thêm tài khoản</button>
@@ -143,7 +163,7 @@
     <div id="empty-state" class="empty-state" style="display:none">
       <div class="empty-icon">📭</div>
       <div class="empty-title">Chưa có tài khoản nào</div>
-      <div class="empty-desc">Nhấn "Thêm tài khoản" để thêm tài khoản FB Ads đầu tiên.</div>
+      <div class="empty-desc">Nhấn "+ Thêm tài khoản" để bắt đầu.</div>
     </div>
   </div>
 </main>
@@ -165,10 +185,10 @@ let fileSha = '';
 let isDirty = false;
 
 const ZERO_DECIMAL = new Set(['VND','JPY','KRW','TWD','IDR','CLP','ISK']);
-
 function currencyStep(cur) { return ZERO_DECIMAL.has(cur) ? 10000 : 1; }
 function currencyDefault(cur) { return ZERO_DECIMAL.has(cur) ? 150000 : 5; }
 
+// ── Init ──────────────────────────────────────────────────────────────────────
 window.addEventListener('load', async () => {
   PAT  = localStorage.getItem('ghPAT')  || '';
   REPO = localStorage.getItem('ghRepo') || '';
@@ -176,10 +196,11 @@ window.addEventListener('load', async () => {
   else showSetup();
 });
 
+// ── Setup ─────────────────────────────────────────────────────────────────────
 function showSetup() {
-  document.getElementById('setup-section').style.display  = 'block';
+  document.getElementById('setup-section').style.display   = 'block';
   document.getElementById('content-section').style.display = 'none';
-  document.getElementById('save-bar').style.display = 'none';
+  document.getElementById('save-bar').style.display        = 'none';
   setStatus(false);
 }
 
@@ -197,11 +218,24 @@ function disconnect() {
   localStorage.removeItem('ghPAT');
   localStorage.removeItem('ghRepo');
   PAT = REPO = '';
-  document.getElementById('input-pat').value  = '';
-  document.getElementById('input-repo').value = '';
   showSetup();
 }
 
+function saveAppConfig() {
+  const id     = document.getElementById('app-id-input').value.trim();
+  const secret = document.getElementById('app-secret-input').value.trim();
+  localStorage.setItem('fbAppId',     id);
+  localStorage.setItem('fbAppSecret', secret);
+}
+
+function loadAppConfig() {
+  const id     = localStorage.getItem('fbAppId')     || '';
+  const secret = localStorage.getItem('fbAppSecret') || '';
+  document.getElementById('app-id-input').value     = id;
+  document.getElementById('app-secret-input').value = secret;
+}
+
+// ── GitHub API ────────────────────────────────────────────────────────────────
 async function ghGet(path) {
   const r = await fetch(`https://api.github.com/repos/${REPO}/${path}`, {
     headers: { Authorization: `token ${PAT}`, Accept: 'application/vnd.github.v3+json' }
@@ -232,6 +266,7 @@ async function loadConfig() {
     document.getElementById('save-bar').style.display        = 'flex';
     document.getElementById('repo-label').textContent        = REPO;
     setStatus(true);
+    loadAppConfig();
     renderAccounts();
     setDirty(false);
   } catch (err) {
@@ -240,6 +275,62 @@ async function loadConfig() {
   }
 }
 
+// ── Token exchange ────────────────────────────────────────────────────────────
+async function exchangeToken(i) {
+  const appId     = localStorage.getItem('fbAppId')     || '';
+  const appSecret = localStorage.getItem('fbAppSecret') || '';
+  const shortToken = document.getElementById(`short-token-${i}`).value.trim();
+  const statusEl   = document.getElementById(`token-status-${i}`);
+  const btn        = document.getElementById(`exchange-btn-${i}`);
+
+  if (!appId || !appSecret) {
+    statusEl.className = 'token-status err';
+    statusEl.textContent = '❌ Chưa điền App ID / App Secret ở trên';
+    return;
+  }
+  if (!shortToken) {
+    statusEl.className = 'token-status err';
+    statusEl.textContent = '❌ Vui lòng paste short-lived token vào ô trên';
+    return;
+  }
+
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spinner spinner-dark"></span>';
+  statusEl.className = 'token-status';
+
+  try {
+    const url = `https://graph.facebook.com/oauth/access_token?grant_type=fb_exchange_token&client_id=${encodeURIComponent(appId)}&client_secret=${encodeURIComponent(appSecret)}&fb_exchange_token=${encodeURIComponent(shortToken)}`;
+    const res  = await fetch(url);
+    const data = await res.json();
+
+    if (data.error) {
+      statusEl.className = 'token-status err';
+      statusEl.textContent = '❌ ' + data.error.message;
+      return;
+    }
+
+    const longToken = data.access_token;
+    const days = Math.round((data.expires_in || 0) / 86400);
+
+    // Save to config
+    config.accounts[i].access_token = longToken;
+    setDirty(true);
+
+    // Clear short token input for security
+    document.getElementById(`short-token-${i}`).value = '';
+
+    statusEl.className = 'token-status ok';
+    statusEl.textContent = `✓ Đã lấy long-lived token (${days} ngày) — nhớ nhấn "Lưu lên GitHub"`;
+  } catch (err) {
+    statusEl.className = 'token-status err';
+    statusEl.textContent = '❌ Lỗi: ' + err.message;
+  } finally {
+    btn.disabled = false;
+    btn.textContent = 'Exchange';
+  }
+}
+
+// ── Render ────────────────────────────────────────────────────────────────────
 function renderAccounts() {
   const list  = document.getElementById('accounts-list');
   const empty = document.getElementById('empty-state');
@@ -253,11 +344,9 @@ function renderAccounts() {
     const hasToken = !!acc.access_token;
     const card = document.createElement('div');
     card.className = 'account-card';
-    card.id = `card-${i}`;
     card.innerHTML = `
       <div class="account-header">
-        <input class="account-name-input" type="text"
-          placeholder="Tên tài khoản (tùy chọn)"
+        <input class="account-name-input" type="text" placeholder="Tên tài khoản"
           value="${esc(acc.name || '')}"
           oninput="updateAccount(${i},'name',this.value)" />
         <button class="btn btn-danger btn-sm" onclick="removeAccount(${i})">Xóa</button>
@@ -282,35 +371,34 @@ function renderAccounts() {
         </select>
       </div>
 
-      <div class="threshold-grid">
-        <div class="threshold-box">
-          <div class="threshold-type spend">⚠️ Cảnh báo khi Spend Cap còn lại</div>
-          <div class="threshold-input-wrap">
-            <input class="threshold-input" type="number" min="0" step="${currencyStep(cur)}"
-              value="${acc.spend_limit_warning ?? currencyDefault(cur)}"
-              oninput="updateAccount(${i},'spend_limit_warning',+this.value)" />
-            <span class="currency-tag" id="cur-tag-${i}">${cur}</span>
-          </div>
+      <div class="threshold-box">
+        <div class="threshold-type">⚠️ Cảnh báo khi Spend Cap còn lại</div>
+        <div class="threshold-input-wrap">
+          <input class="threshold-input" type="number" min="0" step="${currencyStep(cur)}"
+            value="${acc.spend_limit_warning ?? currencyDefault(cur)}"
+            oninput="updateAccount(${i},'spend_limit_warning',+this.value)" />
+          <span class="currency-tag" id="cur-tag-${i}">${cur}</span>
         </div>
       </div>
 
-      <button class="token-toggle" onclick="toggleToken(${i})">
-        ${hasToken ? '🔑 Đang dùng token riêng — click để sửa' : '+ Thêm access token riêng (tài khoản ngoài BM)'}
-      </button>
-      <div class="token-section" id="token-section-${i}" style="display:${hasToken?'block':'none'}">
-        <input class="field-input" type="password" placeholder="Long-lived access token của tài khoản này"
-          value="${esc(acc.access_token || '')}"
-          oninput="updateAccount(${i},'access_token',this.value)"
-          style="width:100%; font-size:12px;" />
-        <div class="token-hint">Token này chỉ cần quyền <strong>ads_read</strong>. Nếu để trống, dùng token chung (FB_ACCESS_TOKEN secret).</div>
+      <div class="token-box">
+        <div class="token-box-title">🔑 Access Token ${hasToken ? '<span style="color:var(--green)">● Đã có</span>' : '<span style="color:var(--muted)">(tùy chọn — để trống dùng token chung)</span>'}</div>
+        <div class="token-input-row">
+          <input class="field-input" id="short-token-${i}" type="password"
+            placeholder="Paste short-lived token vào đây để exchange…" />
+          <button class="btn btn-primary btn-xs" id="exchange-btn-${i}" onclick="exchangeToken(${i})">Exchange</button>
+        </div>
+        <div class="token-status" id="token-status-${i}"></div>
+        ${hasToken ? `<div style="margin-top:8px; font-size:11px; color:var(--muted)">Token hiện tại: <span style="font-family:monospace">${acc.access_token.slice(0,20)}…</span> <button class="link-btn" style="font-size:11px" onclick="clearToken(${i})">Xóa</button></div>` : ''}
       </div>`;
     list.appendChild(card);
   });
 }
 
-function toggleToken(i) {
-  const section = document.getElementById(`token-section-${i}`);
-  section.style.display = section.style.display === 'none' ? 'block' : 'none';
+function clearToken(i) {
+  delete config.accounts[i].access_token;
+  setDirty(true);
+  renderAccounts();
 }
 
 function updateCurrency(i, cur) {
@@ -324,8 +412,6 @@ function addAccount() {
   config.accounts.push({ id: '', name: '', currency: 'VND', spend_limit_warning: 150000 });
   renderAccounts();
   setDirty(true);
-  const inputs = document.querySelectorAll('.field-input');
-  if (inputs.length) inputs[inputs.length - 4]?.focus();
 }
 
 function removeAccount(i) {
@@ -339,17 +425,15 @@ function updateAccount(i, key, val) {
   setDirty(true);
 }
 
+// ── Save ──────────────────────────────────────────────────────────────────────
 async function saveConfig() {
-  const btn = document.getElementById('btn-save');
+  const btn     = document.getElementById('btn-save');
   const spinner = document.getElementById('save-spinner');
-  btn.disabled = true;
+  btn.disabled  = true;
   spinner.style.display = 'inline-block';
   try {
-    // Remove empty access_token fields before saving
     const cleaned = JSON.parse(JSON.stringify(config));
-    cleaned.accounts.forEach(acc => {
-      if (!acc.access_token) delete acc.access_token;
-    });
+    cleaned.accounts.forEach(acc => { if (!acc.access_token) delete acc.access_token; });
     const content = JSON.stringify(cleaned, null, 2) + '\n';
     const res = await ghPut('contents/config.json', content, fileSha);
     fileSha = res.content.sha;
@@ -363,6 +447,7 @@ async function saveConfig() {
   }
 }
 
+// ── Helpers ───────────────────────────────────────────────────────────────────
 function setStatus(ok) {
   const b = document.getElementById('status-badge');
   b.className = `badge ${ok ? 'connected' : 'disconnected'}`;
@@ -371,8 +456,8 @@ function setStatus(ok) {
 
 function setDirty(dirty) {
   isDirty = dirty;
-  document.getElementById('save-hint').textContent = dirty ? 'Có thay đổi chưa lưu' : 'Đã đồng bộ';
-  document.getElementById('save-hint').style.color = dirty ? 'var(--orange)' : 'var(--muted)';
+  document.getElementById('save-hint').textContent   = dirty ? 'Có thay đổi chưa lưu' : 'Đã đồng bộ';
+  document.getElementById('save-hint').style.color   = dirty ? 'var(--orange)' : 'var(--muted)';
 }
 
 function esc(s) {
@@ -385,7 +470,7 @@ function toast(msg, type = 'success') {
   el.textContent = (type === 'success' ? '✓ ' : '✕ ') + msg;
   el.className = `toast show ${type}`;
   clearTimeout(toastTimer);
-  toastTimer = setTimeout(() => { el.className = 'toast'; }, 3000);
+  toastTimer = setTimeout(() => { el.className = 'toast'; }, 3500);
 }
 </script>
 </body>
