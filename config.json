@@ -4,19 +4,19 @@
       "id": "1250780585848438",
       "name": "Marjorie Managa (TK2)",
       "currency": "VND",
-      "spend_limit_warning": 200000
+      "spend_limit_warning": 500000
     },
     {
       "id": "1884050678778357",
       "name": "Stephanie Pucot (TK3)",
       "currency": "USD",
-      "spend_limit_warning": 5
+      "spend_limit_warning": 10
     },
     {
       "id": "329411803089088",
       "name": "Cyrus Garote (TK4)",
       "currency": "USD",
-      "spend_limit_warning": 5
+      "spend_limit_warning": 10
     },
     {
       "id": "3475020552748161",
