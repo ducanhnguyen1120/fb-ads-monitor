@@ -37,8 +37,9 @@ def check_account(default_token, account_cfg, discord_webhook):
     account_id = str(account_cfg["id"]).lstrip("act_")
     spend_warn = float(account_cfg.get("spend_limit_warning", 150000))
 
-    # Per-account token takes priority over global token
-    token = account_cfg.get("access_token") or default_token
+    # Per-account token: read from env var specified by token_env, fallback to global token
+    token_env = account_cfg.get("token_env")
+    token = (os.environ.get(token_env) if token_env else None) or default_token
 
     url = f"https://graph.facebook.com/v19.0/act_{account_id}"
     params = {
@@ -60,8 +61,9 @@ def check_account(default_token, account_cfg, discord_webhook):
         }])
         return
 
-    name     = data.get("name", f"act_{account_id}")
-    currency = data.get("currency", "VND")
+    name       = data.get("name", f"act_{account_id}")
+    short_name = account_cfg.get("short_name", name)
+    currency   = data.get("currency", "VND")
 
     # Convert from API minor units to major units
     spend_cap = to_major(float(data.get("spend_cap") or 0), currency)
@@ -75,13 +77,11 @@ def check_account(default_token, account_cfg, discord_webhook):
         if remaining_cap <= spend_warn:
             color = 0xFF0000 if remaining_cap <= spend_warn * 0.5 else 0xFF8C00
             send_discord(discord_webhook, [{
-                "title": "⚠️ Sắp đạt giới hạn chi tiêu (Spend Cap)!",
+                "title": f"⚠️ Cảnh báo {short_name} còn {fmt(remaining_cap, currency)} {currency}",
                 "color": color,
                 "fields": [
-                    {"name": "Tài khoản",      "value": name,                                        "inline": False},
                     {"name": "Đã tiêu",         "value": f"{fmt(spent, currency)} {currency}",        "inline": True},
                     {"name": "Giới hạn",        "value": f"{fmt(spend_cap, currency)} {currency}",    "inline": True},
-                    {"name": "Còn lại",         "value": f"**{fmt(remaining_cap, currency)} {currency}**", "inline": True},
                     {"name": "% đã dùng",       "value": f"{pct:.1f}%",                               "inline": True},
                     {"name": "Ngưỡng cảnh báo", "value": f"{fmt(spend_warn, currency)} {currency}",   "inline": True},
                 ],

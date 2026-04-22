@@ -20,7 +20,8 @@ jobs:
 
       - name: Check FB Ads spending
         env:
-          FB_ACCESS_TOKEN:     ${{ secrets.FB_ACCESS_TOKEN }}
-          FB_AD_ACCOUNT_ID:    ${{ secrets.FB_AD_ACCOUNT_ID }}
-          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+          FB_ACCESS_TOKEN:       ${{ secrets.FB_ACCESS_TOKEN }}
+          FB_AD_ACCOUNT_ID:      ${{ secrets.FB_AD_ACCOUNT_ID }}
+          DISCORD_WEBHOOK_URL:   ${{ secrets.DISCORD_WEBHOOK_URL }}
+          FB_ACCESS_TOKEN_SEORA: ${{ secrets.FB_ACCESS_TOKEN_SEORA }}
         run: python check_ads.py
