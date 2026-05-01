@@ -37,9 +37,8 @@ def check_account(default_token, account_cfg, discord_webhook):
     account_id = str(account_cfg["id"]).lstrip("act_")
     spend_warn = float(account_cfg.get("spend_limit_warning", 150000))
 
-    # Per-account token: read from env var specified by token_env, fallback to global token
-    token_env = account_cfg.get("token_env")
-    token = (os.environ.get(token_env) if token_env else None) or default_token
+    # Per-account token takes priority over global token
+    token = account_cfg.get("access_token") or default_token
 
     url = f"https://graph.facebook.com/v19.0/act_{account_id}"
     params = {

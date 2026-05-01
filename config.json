@@ -27,7 +27,7 @@
       "short_name": "SEORA",
       "currency": "VND",
       "spend_limit_warning": 500000,
-      "token_env": "FB_ACCESS_TOKEN_SEORA"
+      "access_token": ""
     }
   ]
 }
